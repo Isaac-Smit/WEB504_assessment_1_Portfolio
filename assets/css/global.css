@@ -1,0 +1,77 @@
+@charset "UTF-8";
+body {
+  display: flex;
+  flex-direction: column;
+  background-image: url(assets஬kgroundshome_background.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: "Oswald";
+  height: 100%;
+}
+
+.navbar {
+  width: 50%;
+  margin-left: 10%;
+  background-color: transparent !important;
+  font-size: 32px;
+  letter-spacing: 5px;
+}
+.navbar .navbar-nav .nav-link {
+  flex: 1;
+  text-align: center;
+  padding: 0 40px;
+}
+.navbar .nav-link {
+  color: #FFFFFF;
+}
+.navbar .nav-link.active {
+  color: #3E9F1C;
+  background-color: rgba(128, 128, 128, 0.4);
+}
+.navbar .navbar-nav {
+  padding: 10px;
+  justify-content: space-around;
+}
+.navbar .nav-link.border-right {
+  border-right: 2px solid white;
+}
+
+.bio-outer-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 80%;
+  height: 60%;
+  margin: 10%;
+  background: rgba(136, 135, 135, 0.4);
+  border-radius: 25px;
+  padding: 20px;
+}
+.bio-outer-container .bio-inner-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  background: rgba(15, 15, 15, 0.8);
+  width: 99.5%;
+  height: 60%;
+  padding: 0.3%;
+  margin: 0.3%;
+  border-radius: 25px;
+}
+.bio-outer-container .text-container {
+  display: flex;
+  flex-direction: column;
+  color: #FFFFFF;
+  font-size: 24px;
+  font-weight: 200;
+  padding: 40px;
+}
+.bio-outer-container .picture-container {
+  background-image: url(../../assets/images/home_images/isaac_pic.png);
+  height: auto;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 50%;
+}/*# sourceMappingURL=global.css.map */
