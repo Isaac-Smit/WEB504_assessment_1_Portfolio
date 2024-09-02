@@ -1,19 +1,23 @@
 body {
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
-    background-image: url(assets\backgrounds\home_background.png);
+    background-image: url(/assets/backgrounds/home_background.png);
     background-size: cover;
     background-repeat: no-repeat;
     font-family: 'Oswald';
-    height:100%;
+    height:100vh;
+    padding-top: 80px;
 }
 
 .navbar {
-    width: 50%;
-    margin-left: 10%;
+    position: fixed;
+    width: 100%;
     background-color: transparent !important;
     font-size: 32px;
     letter-spacing: 5px;
+    top:0;
     .navbar-nav .nav-link {
         flex: 1;
         text-align: center;
@@ -37,40 +41,54 @@ body {
 
 .bio-outer-container {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-content: center;
     width: 80%;
-    height: 60%;
-    margin:10%;
+    height: 70%;
     background:rgba(136, 135, 135, 0.4);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.8);
     border-radius: 25px;
-    padding: 20px;
+    padding: 15px;
+
     .bio-inner-container {
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-content: center;
         background:rgba(15, 15, 15, 0.8);
-        width: 99.5%;
-        height: 60%;
-        padding: 0.3%;
-        margin:0.3%;
+        width: 100%;
+        height: 100%;
         border-radius: 25px;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.8);
     }
+
+    .title-container {
+        font-size: 32px;
+        font-weight: 300;
+        letter-spacing: 1px;
+        border-bottom: #FFFFFF solid 1px;
+        width: 25%;
+        padding-left: 3%;
+        margin-bottom: 5%;
+    }
+
     .text-container {
         display: flex;
         flex-direction: column;
         color:#FFFFFF;
         font-size: 24px;
-        font-weight: 200;
+        font-weight: 50;
+        letter-spacing: 4px;
         padding: 40px;
+        width: 85%;
     }
+
     .picture-container {
-        background-image: url(../../assets/images/home_images/isaac_pic.png);
-        height: auto;
-        background-size: cover;
+        background-image: url(/assets/pictures/isaac_pic.png);
+        background-size:cover;
         background-repeat: no-repeat;
-        height: 100%;
-        width: 50%;
+        width:35%;
+        border-radius: 25px;
     }
 }
