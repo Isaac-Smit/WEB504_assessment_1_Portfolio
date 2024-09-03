@@ -1,0 +1,67 @@
+body {
+  background-image: url(/assets/backgrounds/contact_background.jpg);
+}
+
+.navbar .nav-link.active {
+  color: rgba(230, 178, 11, 0.8705882353);
+  background-color: rgba(128, 128, 128, 0.4);
+}
+
+.content-outer-container {
+  width: 50vw;
+}
+.content-outer-container .content-inner-container {
+  flex-direction: column;
+  padding: 20px;
+  color: #FFFFFF;
+  font-size: 27px;
+}
+.content-outer-container .content-inner-container .title-container {
+  font-size: 45px;
+  font-weight: 350;
+  letter-spacing: 0.5px;
+  border-bottom: #FFFFFF solid 1px;
+  width: 35%;
+  padding-left: 5%;
+  margin: 3%;
+  margin-bottom: 1%;
+}
+.content-outer-container .content-inner-container .contact-form {
+  display: flex;
+  flex-direction: column;
+  padding: 5%;
+}
+.content-outer-container .content-inner-container .contact-form .contact-input-group {
+  display: flex;
+  flex-direction: column;
+}
+.content-outer-container .content-inner-container .contact-form #email {
+  width: 70%;
+}
+.content-outer-container .content-inner-container .contact-form .contact-input-group-inline {
+  display: flex;
+  justify-content: flex-start;
+  gap: 2rem;
+  width: 70%;
+  margin-bottom: 3%;
+}
+.content-outer-container .content-inner-container .contact-form .form-control {
+  padding: 12px;
+  width: 100%;
+  margin-bottom: 3%;
+  box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.5), 0px 8px 16px rgba(0, 0, 0, 0.8);
+  border: 5px solid #7D7D7D;
+  background-color: #f0eded;
+}
+.content-outer-container .content-inner-container .contact-form .submit-btn {
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #7D7D7D;
+  color: #FFFFFF;
+  border: none;
+  cursor: pointer;
+  width: 18%;
+  letter-spacing: 2px;
+  text-align: center;
+  margin: 20px auto;
+}/*# sourceMappingURL=contact.css.map */
