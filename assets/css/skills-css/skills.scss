@@ -1,14 +1,5 @@
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     background-image: url(/assets/backgrounds/skills_background.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    font-family: 'Oswald';
-    height:100vh;
-    padding-top: 80px;
 }
 
 .navbar{
@@ -23,9 +14,22 @@ body {
     .content-inner-container {
         display: flex;
         flex-direction: column;
+
+        .title-container-skills{
+            font-size: 30px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            border-bottom: #FFFFFF solid 1px;
+            width: 20%;
+            padding-top: 1%;
+            padding-left: 4%;
+            margin: 0.2%;
+            margin-left: 5%;
+            color: #FFFFFF;
+        }
     
         .title-container {
-            font-size: 44px;
+            font-size: 30px;
             font-weight: 300;
             letter-spacing: 2px;
             border-bottom: #FFFFFF solid 1px;
@@ -40,7 +44,7 @@ body {
             display: flex;
             justify-content: flex-end;
             text-align: right;
-            font-size: 44px;
+            font-size: 30px;
             font-weight: 300;
             letter-spacing: 2px;
             border-bottom: #FFFFFF solid 1px;
@@ -70,11 +74,11 @@ body {
                 width: 80%;
                 height: auto;
                 border-radius: 25px;
-                padding: 15px;
+                padding: 1%;
                 margin: 2%;
                 color: #FFFFFF;
                 font-weight: 100;
-                font-size: 20px;
+                font-size: 15px;
                 letter-spacing: 2.5px;
 
                 .skill-card-logo {
@@ -94,7 +98,7 @@ body {
                     }
                 }
                 .skill-card-text {
-                    margin: 20px;
+                    margin: 1%;
                 }
             }
 
@@ -106,11 +110,11 @@ body {
                 width: 80%;
                 height: auto;
                 border-radius: 25px;
-                padding: 15px;
+                padding: 1%;
                 margin: 2%;
                 color: #FFFFFF;
                 font-weight: 100;
-                font-size: 20px;
+                font-size: 15px;
                 letter-spacing: 2.5px;
 
                 .skill-header {
@@ -140,7 +144,7 @@ body {
                 }
                 
                 .skill-card-text {
-                    margin: 20px;
+                    margin: 1%;
                 }
             }
         }
