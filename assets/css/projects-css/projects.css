@@ -12,13 +12,14 @@ body {
   flex-direction: column;
 }
 .content-outer-container .content-inner-container .title-container {
-  font-size: 28px;
+  display: flex;
+  font-size: 2vw;
   font-weight: 400;
   letter-spacing: 2px;
   border-bottom: #FFFFFF solid 1px;
-  width: 20%;
+  width: 23%;
   padding-top: 1%;
-  padding-left: 4%;
+  padding-left: 3%;
   margin: 0.2%;
   margin-left: 5%;
   color: #FFFFFF;
@@ -45,14 +46,14 @@ body {
   margin: 2%;
   color: #FFFFFF;
   font-weight: 100;
-  font-size: 15px;
+  font-size: 1vw;
   letter-spacing: 2px;
 }
 .content-outer-container .content-inner-container .project-card-container .project-card .project-header {
   display: flex;
   width: 100%;
   justify-content: center;
-  font-size: 25px;
+  font-size: 1.5vw;
   font-weight: 300;
   letter-spacing: 3px;
 }
@@ -74,4 +75,49 @@ body {
 }
 .content-outer-container .content-inner-container .project-card-container .project-card .project-text {
   margin: 20px;
+}
+
+@media (max-width: 768px) {
+  .content-outer-container {
+    width: 80vw;
+    margin: 5px auto;
+  }
+  .content-outer-container .content-inner-container .title-container {
+    font-size: 3vw;
+    padding-left: 0%;
+    width: 30%;
+    align-items: center;
+    justify-content: center;
+  }
+  .content-outer-container .content-inner-container .project-card-container {
+    flex-direction: column;
+    width: 100%;
+  }
+  .content-outer-container .content-inner-container .project-card-container .project-card {
+    font-size: 2vw;
+  }
+  .content-outer-container .content-inner-container .project-card-container .project-card .project-header {
+    font-size: 3vw;
+  }
+}
+@media (max-width: 425px) {
+  .content-outer-container {
+    margin: 3%;
+    width: 90vw;
+  }
+  .content-outer-container .content-inner-container .title-container {
+    padding-left: 0%;
+    width: 30%;
+    font-size: 5vw;
+  }
+  .content-outer-container .content-inner-container .project-card-container {
+    flex-direction: column;
+    width: 110%;
+  }
+  .content-outer-container .content-inner-container .project-card-container .project-card {
+    font-size: 4vw;
+  }
+  .content-outer-container .content-inner-container .project-card-container .project-card .project-header {
+    font-size: 5vw;
+  }
 }/*# sourceMappingURL=projects.css.map */

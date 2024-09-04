@@ -5,23 +5,23 @@ body {
     flex-direction: column;
     background-image: url(/assets/backgrounds/home_background.png);
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     font-family: 'Oswald';
-    height:100vh;
-    padding-top: 80px;
+    min-height:100vh;
+    padding-top: 5rem;
 }
 
 .navbar {
     position: fixed;
     width: 100%;
     background-color: transparent !important;
-    font-size: 32px;
-    letter-spacing: 5px;
+    font-size: 2rem;
+    letter-spacing: 0.3125rem;
     top:0;
     .navbar-nav .nav-link {
         flex: 1;
         text-align: center;
-        padding: 0 40px;
+        padding: 0 2.5rem;
     }
     .nav-link{
         color: #FFFFFF;
@@ -31,11 +31,11 @@ body {
         background-color: rgba(128, 128, 128, 0.4);
     }
     .navbar-nav {
-        padding: 10px;
+        padding: 0.625rem;
         justify-content: space-around;
     }
     .nav-link.border-right{
-        border-right: 2px solid white;
+        border-right: 0.125rem solid white;
     }
 }
 
@@ -47,9 +47,9 @@ body {
     width: 80vw;
     height: auto;
     background:rgba(136, 135, 135, 0.4);
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.8);
-    border-radius: 25px;
-    padding: 15px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.8);
+    border-radius: 1.5625rem;
+    padding: 0.9375rem;
 
     .content-inner-container {
         display: flex;
@@ -59,15 +59,15 @@ body {
         background:rgba(15, 15, 15, 0.8);
         width: 100%;
         height: 100%;
-        border-radius: 25px;
-        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.8);
+        border-radius: 1.5625rem;
+        box-shadow:  0 0.5rem 1rem rgba(0, 0, 0, 0.8);
     }
 
     .title-container {
-        font-size: 30px;
+        font-size: 2vw;
         font-weight: 350;
-        letter-spacing: 0.5px;
-        border-bottom: #FFFFFF solid 1px;
+        letter-spacing: 0.03125rem;
+        border-bottom: #FFFFFF solid 0.0625rem;
         width: 35%;
         padding-left: 5%;
         margin-bottom: 5%;
@@ -77,19 +77,79 @@ body {
         display: flex;
         flex-direction: column;
         color:#FFFFFF;
-        font-size: 25px;
+        font-size: 1.3vw;
         font-weight: 50;
-        letter-spacing: 4px;
+        letter-spacing: 0.25rem;
         padding: 3%;
         width: 85%;
     }
 
     .picture-container {
-        background-image: url(/assets/pictures/isaac_pic_LQ.png);
-        background-size:cover;
-        background-repeat: no-repeat;
-        width:35%;
-        min-height: 400px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 35%;
         border-radius: 25px;
+        overflow: hidden;
+    }
+    .picture-container img {
+        width: 100%;
+        position: relative;
+        height: auto;
+        min-width: 100%; /* Ensures the image doesn't shrink smaller than the container */
+        min-height: 100%; /* Ensures the image covers the container */
+        object-fit: cover;
+        border-radius: inherit;
+    }
+}
+
+@media (max-width: 768px) {
+    .content-outer-container {
+
+
+        .content-inner-container {
+            flex-direction: column-reverse;
+            align-items: center;
+
+            .title-container {
+                text-align: center;
+                padding-left: 0%;
+                width: 100%;
+                font-size: 3vw;
+            }
+
+            .picture-container {
+                padding: 2%;
+                width: 50%;
+            }
+
+            .text-container {
+                font-size: 2vw;
+                font-weight: 350;
+            }
+        }
+    }
+}
+
+@media (max-width: 425px) {
+    .content-outer-container {
+        .content-inner-container {
+            .picture-container {
+                padding: 2%;
+                width: 80%;
+            }
+
+            .title-container {
+                text-align: center;
+                padding-left: 0%;
+                width: 100%;
+                font-size: 5vw;
+            }
+
+            .text-container {
+                font-size: 3vw;
+                font-weight: 350;
+            }
+        }
     }
 }
