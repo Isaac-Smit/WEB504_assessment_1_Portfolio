@@ -11,6 +11,9 @@ body {
   display: flex;
   flex-direction: column;
 }
+.content-outer-container .content-inner-container .search-bar {
+  border-radius: 25px;
+}
 .content-outer-container .content-inner-container .title-container {
   display: flex;
   font-size: 2vw;
@@ -30,8 +33,25 @@ body {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: auto;
+  height: 520px;
   margin-bottom: 0.1%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #353434 #c0bfbf;
+  direction: ltr;
+}
+.content-outer-container .content-inner-container .project-card-container .project-card-container::-webkit-scrollbar {
+  width: 10px;
+}
+.content-outer-container .content-inner-container .project-card-container .project-card-container::-webkit-scrollbar-thumb {
+  background-color: #7D7D7D;
+  border-radius: 1rem;
+  height: 50px;
+}
+.content-outer-container .content-inner-container .project-card-container .project-card-container::-webkit-scrollbar-track {
+  background-color: #918f8f;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .content-outer-container .content-inner-container .project-card-container .project-card {
   display: flex;
@@ -48,6 +68,13 @@ body {
   font-weight: 100;
   font-size: 1vw;
   letter-spacing: 2px;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+.content-outer-container .content-inner-container .project-card-container .project-card:hover {
+  background-color: #d6d5d5;
+  color: #080808;
+  transform: scale(1.03);
+  box-shadow: 0 10px 20px rgb(0, 0, 0);
 }
 .content-outer-container .content-inner-container .project-card-container .project-card .project-header {
   display: flex;
@@ -78,10 +105,6 @@ body {
 }
 
 @media (max-width: 768px) {
-  .content-outer-container {
-    width: 80vw;
-    margin: 5px auto;
-  }
   .content-outer-container .content-inner-container .title-container {
     font-size: 3vw;
     padding-left: 0%;
@@ -101,10 +124,6 @@ body {
   }
 }
 @media (max-width: 425px) {
-  .content-outer-container {
-    margin: 3%;
-    width: 90vw;
-  }
   .content-outer-container .content-inner-container .title-container {
     padding-left: 0%;
     width: 30%;
@@ -118,6 +137,6 @@ body {
     font-size: 4vw;
   }
   .content-outer-container .content-inner-container .project-card-container .project-card .project-header {
-    font-size: 5vw;
+    font-size: 4vw;
   }
 }/*# sourceMappingURL=projects.css.map */

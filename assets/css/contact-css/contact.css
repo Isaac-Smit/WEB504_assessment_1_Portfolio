@@ -9,15 +9,15 @@ body {
 
 .content-outer-container {
   width: 40vw;
+  margin: 6%;
 }
 .content-outer-container .content-inner-container {
   flex-direction: column;
   padding: 10px;
   color: #FFFFFF;
-  font-size: 20px;
 }
 .content-outer-container .content-inner-container .title-container {
-  font-size: 30px;
+  font-size: 1.5vw;
   font-weight: 350;
   letter-spacing: 0.5px;
   border-bottom: #FFFFFF solid 1px;
@@ -30,7 +30,7 @@ body {
   display: flex;
   flex-direction: column;
   padding: 3%;
-  font-size: 15px;
+  font-size: 1vw;
 }
 .content-outer-container .content-inner-container .contact-form .contact-input-group {
   display: flex;
@@ -65,4 +65,86 @@ body {
   letter-spacing: 2px;
   text-align: center;
   margin: 5px auto;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+}
+.content-outer-container .content-inner-container .contact-form .submit-btn:hover {
+  background-color: #4F4F4F;
+  transform: scale(1.05);
+  box-shadow: 0 6px 10px rgb(0, 0, 0);
+}
+.content-outer-container .content-inner-container .contact-form .submit-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  background-color: #FFFFFF;
+  color: #7D7D7D;
+  transition: background-color 0.1s ease, transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+@media (max-width: 1024px) {
+  .content-outer-container {
+    width: 70vw;
+    margin-top: 8rem;
+  }
+  .content-outer-container .content-inner-container .title-container {
+    font-size: 3vw;
+  }
+  .content-outer-container .content-inner-container .contact-form {
+    font-size: 1.5vw;
+  }
+}
+@media (max-width: 768px) {
+  .content-outer-container {
+    width: 80vw;
+  }
+  .content-outer-container .content-inner-container .title-container {
+    font-size: 4vw;
+    width: 50%;
+    padding-left: 0%;
+  }
+  .content-outer-container .content-inner-container .contact-form {
+    width: 80%;
+    font-size: 2vw;
+  }
+  .content-outer-container .content-inner-container .contact-form input::-moz-placeholder {
+    font-size: 2vw;
+  }
+  .content-outer-container .content-inner-container .contact-form input::placeholder {
+    font-size: 2vw;
+  }
+  .content-outer-container .content-inner-container .contact-form textarea::-moz-placeholder {
+    font-size: 2vw;
+  }
+  .content-outer-container .content-inner-container .contact-form textarea::placeholder {
+    font-size: 2vw;
+  }
+  .content-outer-container .content-inner-container .contact-form .submit-btn {
+    width: 25%;
+  }
+}
+@media (max-width: 425px) {
+  .content-outer-container {
+    margin-top: 0;
+  }
+  .content-outer-container .content-inner-container .title-container {
+    font-size: 6vw;
+  }
+  .content-outer-container .content-inner-container .contact-form {
+    font-size: 3vw;
+  }
+  .content-outer-container .content-inner-container .contact-form input::-moz-placeholder {
+    font-size: 3vw;
+  }
+  .content-outer-container .content-inner-container .contact-form input::placeholder {
+    font-size: 3vw;
+  }
+  .content-outer-container .content-inner-container .contact-form textarea::-moz-placeholder {
+    font-size: 3vw;
+  }
+  .content-outer-container .content-inner-container .contact-form textarea::placeholder {
+    font-size: 3vw;
+  }
+  .content-outer-container .content-inner-container .contact-form .submit-btn {
+    width: 40%;
+  }
 }/*# sourceMappingURL=contact.css.map */
