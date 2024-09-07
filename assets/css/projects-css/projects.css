@@ -115,6 +115,7 @@ body {
   .content-outer-container .content-inner-container .project-card-container {
     flex-direction: column;
     width: 100%;
+    padding-top: 60%;
   }
   .content-outer-container .content-inner-container .project-card-container .project-card {
     font-size: 2vw;
@@ -132,6 +133,7 @@ body {
   .content-outer-container .content-inner-container .project-card-container {
     flex-direction: column;
     width: 110%;
+    padding-top: 100%;
   }
   .content-outer-container .content-inner-container .project-card-container .project-card {
     font-size: 4vw;

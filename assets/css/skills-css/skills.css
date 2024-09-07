@@ -7,6 +7,9 @@ body {
   background-color: rgba(128, 128, 128, 0.4);
 }
 
+.content-outer-container {
+  height: 100vh;
+}
 .content-outer-container .content-inner-container {
   display: flex;
   flex-direction: column;
@@ -56,7 +59,7 @@ body {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 420px;
+  height: auto;
   margin-bottom: 0.1%;
   overflow-y: auto;
   scrollbar-width: thin;
@@ -163,6 +166,9 @@ body {
 }
 
 @media (max-width: 768px) {
+  .content-outer-container {
+    margin-top: 30%;
+  }
   .content-outer-container .content-inner-container .title-container-skills {
     display: flex;
     flex-wrap: wrap;
@@ -190,6 +196,7 @@ body {
   }
   .content-outer-container .content-inner-container .skill-card-container {
     flex-direction: column;
+    padding-top: 100%;
   }
   .content-outer-container .content-inner-container .skill-card-container .skill-card {
     display: flex;
@@ -203,12 +210,12 @@ body {
     font-size: 2vw;
   }
   .content-outer-container .content-inner-container .skill-card-container .skill-card .skill-card-logo {
-    height: 100%;
-    width: 50%;
+    height: 50%;
+    width: 35%;
   }
   .content-outer-container .content-inner-container .skill-card-container .skill-card .skill-card-logo .img {
     height: 100%;
-    width: 80%;
+    width: 100%;
   }
   .content-outer-container .content-inner-container .skill-card-container .skill-card-right {
     display: flex;
@@ -223,15 +230,18 @@ body {
     text-align: left;
   }
   .content-outer-container .content-inner-container .skill-card-container .skill-card-right .skill-card-logo {
-    height: 100%;
-    width: 50%;
+    height: 50%;
+    width: 35%;
   }
   .content-outer-container .content-inner-container .skill-card-container .skill-card-right .skill-card-logo .img {
     height: 100%;
-    width: 80%;
+    width: 100%;
   }
 }
 @media (max-width: 425px) {
+  .content-outer-container {
+    height: 100vh;
+  }
   .content-outer-container .content-inner-container .title-container-skills {
     font-size: 6vw;
   }
@@ -240,6 +250,9 @@ body {
   }
   .content-outer-container .content-inner-container .title-container-right {
     font-size: 6vw;
+  }
+  .content-outer-container .content-inner-container .skill-card-container {
+    padding-top: 180%;
   }
   .content-outer-container .content-inner-container .skill-card-container .skill-card .skill-card-text {
     font-size: 3.5vw;
