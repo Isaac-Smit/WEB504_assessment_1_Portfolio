@@ -9,3 +9,5 @@ once install, push the "f1" key and type "Live Sass: Watch Sass". this will then
 make changes to the SCSS files. You must only make edits to the SCSS files, because this extension
 will automatically create, edit and save css files and generate a minified version as well.
 This will need to be done every time changes are to be made with CSS.
+
+--NOTE!-- all content that is text is all placeholder and will be properly filled out before launch.
