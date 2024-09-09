@@ -84,6 +84,7 @@ body {
 @media (max-width: 1024px) {
   .content-outer-container {
     width: 70vw;
+    height: 80vh;
     margin-top: 8rem;
   }
   .content-outer-container .content-inner-container .title-container {

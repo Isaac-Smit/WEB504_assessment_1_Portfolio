@@ -10,7 +10,7 @@ body {
 }
 
 .content-outer-container {
-    height: 100vh;
+    height: 70vh;
     .content-inner-container {
         display: flex;
         flex-direction: column;
@@ -119,7 +119,7 @@ body {
                     }
 
                     .img:hover {
-                        transform: scale(1.1) rotate(360deg);
+                        transform: scale(1.3) rotate(360deg);
                     }
                 }
                 .skill-card-text {
