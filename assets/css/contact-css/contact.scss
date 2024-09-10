@@ -129,7 +129,7 @@ body {
 @media (max-width:1024px) {
     .content-outer-container{
         width: 70vw;
-        height: 80vh;
+        height: 90vh;
         margin-top: 8rem;
         .content-inner-container{
             .title-container{
@@ -147,6 +147,7 @@ body {
 
 @media (max-width:768px) {
     .content-outer-container{
+        height: 80vh;
         width: 80vw;
         .content-inner-container{
             .title-container{
