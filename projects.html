@@ -1,86 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <!-- https://getbootstrap.com/docs/5.3/components/navbar/ -->
-    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-    <link href="assets\css\global-css\global.css" rel="stylesheet">
-    <link href="assets\css\projects-css\projects.css" rel="stylesheet">
-    <title>Isaac Smith Projects</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <!-- https://getbootstrap.com/docs/5.3/components/navbar/ -->
+  <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+  <script src="scripts/projects.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+  <link href="assets\css\global-css\global.css" rel="stylesheet">
+  <link href="assets\css\projects-css\projects.css" rel="stylesheet">
+
+  <script defer src="https://www.gstatic.com/firebasejs/9.1.0/firebase-app-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/9.1.0/firebase-auth-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/9.1.0/firebase-database-compat.js"></script>
+
+  <title>Isaac Smith Projects</title>
 </head>
+
 <body>
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-              <a class="nav-link border-right left" aria-current="page" href="index.html">Home</a>
-              <a class="nav-link border-right active" href="projects.html">Projects</a>
-              <a class="nav-link border-right middle inner-right" href="skills.html">Skills</a>
-              <a class="nav-link right" href="contact.html">Contact</a>
-            </div>
-          </div>
-
-          <div class="ms-auto">
-            <a href="" class="nav-login-button">Login</a>
-          </div>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link border-right left" aria-current="page" href="index.html">Home</a>
+          <a class="nav-link border-right active" href="projects.html">Projects</a>
+          <a class="nav-link border-right middle inner-right" href="skills.html">Skills</a>
+          <a class="nav-link right" href="contact.html">Contact</a>
         </div>
-      </nav>
+      </div>
 
-    <div class="content-outer-container">
-        <div class="content-inner-container">
-            <div class="title-container">Projects</div>
-            <div class="search-bar">
-              <input type="text" id="searchInput" placeholder="Search Projects...">
-            </div>
-                <div class="project-card-container">
-                    <div class="project-card">
-                        <div class="project-header">Stormy's Barbershop</div>
-                        <div class="project-picture"><img src="assets\pictures\project_examples\stormys_picture.png" alt="Project Image" class="img"></div>
-                        <div class="project-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                            </div>
-                    </div>
-                    <div class="project-card">
-                        <div class="project-header">NISA</div>
-                        <div class="project-picture"><img src="assets\pictures\project_examples\nisa_picture.png" alt="Project Image" class="img"></div>
-                        <div class="project-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                            </div>
-                    </div>
-                </div>
-        </div>
+      <div class="ms-auto">
+        <button class="nav-login-button" onclick="openPopup()">Login</button>
+      </div>
     </div>
+  </nav>
 
-    <div class="content-outer-container">
-      <div class="content-inner-container">
-        <div class="comment-section">
-          <div class="comment-title">Leave a Comment</div>
-          <form class="comment-form">
-            <textarea name="comment" rows="4" placeholder="Your comments here..." required></textarea>
-            <button type="submit" class="submit-comment">Submit Comment</button>
-          </form>
-          <div class="divider"></div>
-          <div class="comments-list">
-            <div class="comment-header">Comments:</div>
-            <div class="comment-item">
-              <p><strong></strong></p>
-            </div>
+  <div id="login-popup">
+    <div class="popup-content">
+
+      <div id="login-btn">
+        <h2>Login</h2>
+        <div class="divider"></div>
+        <button class="login-btn google">Login with Google</button>
+        <button class="login-btn email" id="login-email-btn" onclick="showLoginForm()">Login with Email</button>
+        <div class="divider"></div>
+        <div class="bottom-buttons">
+          <button class="create-account" id="show-create-account" onclick="showCreateAccountForm()">Create
+            Account</button>
+          <button class="close-button" onclick="closePopup()">Close</button>
+        </div>
+      </div>
+
+      <div id="login-form-container" style="display: none;">
+        <h2>Login with Email</h2>
+        <form id="login-email-form" class="login-form">
+          <input class="login-form-button" type="email" id="login-email" placeholder="Enter your email" required>
+          <input class="login-form-button" type="password" id="login-password" placeholder="Enter your password" required>
+          <button type="submit" class="login-button">Login</button>
+        </form>
+        <div class="divider"></div>
+        <div class="bottom-buttons">
+          <button class="create-account" id="show-create-account" onclick="showCreateAccountForm()">Create
+            Account</button>
+          <button class="close-button" onclick="closePopup()">Close</button>
+        </div>
+      </div>
+
+      <div id="create-account-form-container" style="display: none;">
+        <h2>Create Account</h2>
+        <form id="create-account-form">
+          <input class="login-form-button" type="text" id="full-name" placeholder="Full Name" required>
+          <input class="login-form-button" type="email" id="create-email" placeholder="Email" required>
+          <input class="login-form-button" type="password" id="create-password" placeholder="Password" required>
+          <button class="create-account-form-button"type="submit">Create Account</button>
+        </form>
+        <div class="divider"></div>
+        <button class="login-Instead-btn" id="show-login-from-create" onclick="showLoginForm()">Login Instead</button>
+        <button class="close-button-create-account" onclick="closePopup()">Close</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="content-outer-container">
+    <div class="content-inner-container">
+      <div class="title-container">Projects</div>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search Projects...">
+      </div>
+      <div class="project-card-container">
+        <div class="project-card">
+          <div class="project-header">Stormy's Barbershop</div>
+          <div class="project-picture"><img src="assets\pictures\project_examples\stormys_picture.png"
+              alt="Project Image" class="img"></div>
+          <div class="project-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-header">NISA</div>
+          <div class="project-picture"><img src="assets\pictures\project_examples\nisa_picture.png" alt="Project Image"
+              class="img"></div>
+          <div class="project-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </div>
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="content-outer-container">
+    <div class="content-inner-container">
+      <div class="comment-section">
+        <div class="comment-title">Leave a Comment</div>
+        <form class="comment-form">
+          <textarea name="comment" rows="3" placeholder="Your comments here..." required></textarea>
+          <button type="submit" class="submit-comment">Submit Comment</button>
+        </form>
+        <div class="divider"></div>
+        <div class="comments-list">
+          <div class="comment-header">Comments:</div>
+          <div class="comment-item">
+            <p><strong></strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 </body>
+
 </html>
