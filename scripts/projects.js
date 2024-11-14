@@ -1,4 +1,9 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
+
+// Initalize firebase
 const firebaseConfig = {
     apiKey: "AIzaSyCCGJdGl0d5gONVmNiEWCdXG6FeHPQCuPE",
     authDomain: "web502-portfolio.firebaseapp.com",
@@ -6,48 +11,44 @@ const firebaseConfig = {
     storageBucket: "web502-portfolio.firebasestorage.app",
     messagingSenderId: "655916256395",
     appId: "1:655916256395:web:c7b0ba82b11597e038988e",
-    measurementId: "G-LZEERTM3QW"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const database = getDatabase(app)
-
-
-
-  function openPopup() {
-    document.getElementById("login-popup").classList.add("active");
-    resetForms(); // Start with the initial form visible each time
 }
 
-function closePopup() {
-    document.getElementById("login-popup").classList.remove("active");
-}
+// declare firebase variables for later use
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-// Reset all forms and show initial login buttons
-function resetForms() {
-    document.getElementById("login-btn").style.display = "block"; // Show initial login options
-    document.getElementById("login-form-container").style.display = "none"; // Hide login form
-    document.getElementById("create-account-form-container").style.display = "none"; // Hide create account form
-}
 
-// Function to show the login form
-function showLoginForm() {
-    document.getElementById("login-btn").style.display = "none"; // Hide initial options
-    document.getElementById("login-form-container").style.display = "block"; // Show login form
-    document.getElementById("create-account-form-container").style.display = "none"; // Hide create account form
-}
+const form = document.getElementById('create-account-form');
+form.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-// Function to show the create account form
-function showCreateAccountForm() {
-    document.getElementById("login-btn").style.display = "none"; // Hide initial options
-    document.getElementById("login-form-container").style.display = "none"; // Hide login form
-    document.getElementById("create-account-form-container").style.display = "block"; // Show create account form
-}
+    const fullName = document.getElementById('full-name').value;
+    const email = document.getElementById('create-email').value;
+    const password = document.getElementById('create-password').value;
 
-// Close popup when clicking outside the form area
-document.getElementById("login-popup").addEventListener("click", function(event) {
-    if (event.target === this) closePopup();
+    createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+
+            const user = userCredential.user;
+            // User successfully signed up
+            // Save additional user data in Firestore
+            setDoc(doc(db, "users", user.uid), {
+                fullName: fullName,
+                email: email,
+                userId: user.uid
+            })
+            .then(() => {
+                console.log("Congrats big penis, account created.")
+                alert("Account created successfully!");
+            })
+            .catch((error) => {
+                console.error("Error saving user to database:", error);
+            });
+        })
+        .catch((error) => {
+            console.error("Error creating user:", error.message);
+        });
 });
 
 
