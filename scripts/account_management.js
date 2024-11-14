@@ -39,7 +39,7 @@ form.addEventListener("submit", function (event) {
                 userId: user.uid
             })
             .then(() => {
-                console.log("Congrats big penis, account created.")
+                console.log("Congrats, account created!")
                 alert("Account created successfully!");
             })
             .catch((error) => {
@@ -50,7 +50,3 @@ form.addEventListener("submit", function (event) {
             console.error("Error creating user:", error.message);
         });
 });
-
-
-
-

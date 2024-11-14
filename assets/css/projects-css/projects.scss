@@ -246,6 +246,40 @@ body {
     transform: scale(1.05);
 }
 
+.signed-in {
+    color: rgb(17, 167, 37);
+    font-size: 1.5vw;
+}
+
+.signed-in-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .close-button {
+        padding: 0.3rem 1.3rem;
+        width: 100%;
+    }
+}
+
+.comment-section {
+    flex-direction: column;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    .comments-list {
+        font-size: 1vw;
+        color: #c0bfbf;
+
+        .comment-buttons {
+            border-radius: 5px;
+            font-size: 0.7vw;
+            padding: 0.3rem 0.2rem;
+            background-color: #7D7D7D;
+        }
+    }
+}
+
 .content-outer-container {
  height:80vh;
  margin-top: 5%;
