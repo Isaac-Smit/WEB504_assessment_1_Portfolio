@@ -22,7 +22,7 @@ const db = getFirestore(app);
 const googleLogin = document.getElementById("google-login-btn");
 googleLogin.addEventListener("click", function() {
     signInWithPopup(auth, provider)
-        .then ((result) => {
+        .then((result) => {
             const user = result.user;
 
             showSignedInNotification();
@@ -30,18 +30,32 @@ googleLogin.addEventListener("click", function() {
             // Prepare user data to store
             const userData = {
                 uid: user.uid,
-                name: user.displayName,
+                displayName: user.displayName,
                 email: user.email,
             };
 
-            // Save user data in Firestore
-            return setDoc(doc(db, 'users', user.uid), userData); // Properly add data to Firestore
-        }).catch((error) => {
+            // Save user data in the 'users' collection
+            const userDocPromise = setDoc(doc(db, 'users', user.uid), userData);
 
-        const errorCode = error.code;
-        const errorMessage = error.message;
-    });
-})
+            // Also save displayName in the 'user-fullname' collection
+            const userFullnamePromise = setDoc(doc(db, 'user-fullname', user.uid), {
+                displayName: user.displayName,
+            });
+
+            // Wait for both write operations to complete
+            return Promise.all([userDocPromise, userFullnamePromise])
+                .then(() => {
+                    console.log("User data successfully saved in both collections.");
+                })
+                .catch((error) => {
+                    console.error("Error saving user to Firestore:", error);
+                });
+        })
+        .catch((error) => {
+            console.error("Error with Google Sign-In:", error);
+        });
+});
+
 
 function showSignedInNotification() {
     // Hide all other containers

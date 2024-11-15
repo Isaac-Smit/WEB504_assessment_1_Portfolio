@@ -23,7 +23,7 @@ const form = document.getElementById('create-account-form');
 form.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const fullName = document.getElementById('full-name').value;
+    const displayName = document.getElementById('full-name').value;
     const email = document.getElementById('create-email').value;
     const password = document.getElementById('create-password').value;
 
@@ -34,7 +34,7 @@ form.addEventListener("submit", function (event) {
             // User successfully signed up
             // Save additional user data in Firestore
             setDoc(doc(db, "users", user.uid), {
-                fullName: fullName,
+                displayName: displayName,
                 email: email,
                 userId: user.uid
             })

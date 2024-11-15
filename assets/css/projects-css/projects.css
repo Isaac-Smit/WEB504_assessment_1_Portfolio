@@ -67,7 +67,7 @@ body {
 
 .divider {
   width: 100%;
-  margin-top: 0.5rem;
+  margin-top: 0.1rem;
   border-bottom: 1.5px solid;
 }
 
@@ -261,20 +261,62 @@ body {
 }
 
 .comment-section {
-  flex-direction: column;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
   width: 100%;
+  margin-top: 0%; /* Fixed margin syntax */
 }
-.comment-section .comments-list {
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
   font-size: 1vw;
   color: #c0bfbf;
+  justify-content: flex-start;
+  height: 350px; /* Set a fixed height for the container */
+  width: 75%;
+  overflow-y: auto; /* This will add the scrollbar when content overflows */
+  padding-right: 10px; /* Optional: space for scrollbar */
 }
-.comment-section .comments-list .comment-buttons {
+
+.comment-button-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.comment-buttons {
   border-radius: 5px;
   font-size: 0.7vw;
-  padding: 0.3rem 0.2rem;
+  padding: 0.3rem 0.3rem;
   background-color: #7D7D7D;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  margin: 0.4rem;
+}
+
+.comments {
+  display: flex;
+  flex-direction: row; /* Each comment and its buttons will be in a row layout */
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(119, 119, 119, 0.747);
+  padding: 1rem;
+  width: 100%; /* Ensure it takes the full width of the container */
+}
+
+.comment-author {
+  font-size: 1vw;
+  margin-right: 1rem; /* Space between the name and the comment text */
+  flex: 1; /* Allow the author name to take up available space */
+}
+
+.comment-text {
+  font-size: 1vw;
+  color: #c0bfbf;
+  flex: 2; /* Allow the text to take more space */
 }
 
 .content-outer-container {
@@ -284,13 +326,12 @@ body {
 .content-outer-container .content-inner-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 .content-outer-container .content-inner-container .comment-section {
-  width: 50%;
+  width: 100%;
   padding: 3rem;
-  margin-top: -20%;
   border-radius: 1rem;
   align-items: center;
   justify-content: center;
@@ -313,6 +354,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 40%;
   gap: 1rem;
 }
 .content-outer-container .content-inner-container .comment-form textarea {
@@ -343,11 +385,11 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 150%;
+  width: 100%;
   height: 1px;
   margin-left: -25%;
   margin-right: -25%;
-  margin-top: 10%;
+  margin-top: 3%;
   margin-bottom: 2%;
   background-color: #c0bfbf;
 }
