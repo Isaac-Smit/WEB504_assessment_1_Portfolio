@@ -260,6 +260,22 @@ body {
   width: 100%;
 }
 
+.account-created {
+  color: rgb(17, 167, 37);
+  font-size: 1.5vw;
+}
+
+.account-created-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.account-created-container .close-button {
+  padding: 0.3rem 1.3rem;
+  width: 100%;
+}
+
 .comment-section {
   display: flex;
   flex-direction: column;

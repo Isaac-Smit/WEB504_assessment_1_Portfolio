@@ -1,7 +1,8 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
 
 
 const firebaseConfig = {
@@ -18,6 +19,14 @@ const auth = getAuth(app);
 auth.languageCode = 'en'
 const provider = new GoogleAuthProvider();
 const db = getFirestore(app);
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        showSignedInNotification(user);
+    } else {
+        showLoggedOutNotification();
+    }
+});
 
 const googleLogin = document.getElementById("google-login-btn");
 googleLogin.addEventListener("click", function() {
@@ -75,6 +84,15 @@ function showSignedInNotification() {
     const loginBtn = document.querySelector(".nav-login-button");
     loginBtn.textContent = "Log Off";
     loginBtn.onclick = handleLogout; // Call handleLogout when clicked
+}
+
+function showLoggedOutNotification() {
+    document.getElementById("signed-in-notification").style.display = "none";
+    document.getElementById("login-btn").style.display = "block"; // Show login button again
+
+    const loginBtn = document.querySelector(".nav-login-button");
+    loginBtn.textContent = "Login";
+    loginBtn.onclick = openPopup; // Reset click handler to open the login popup
 }
 
 // Handle logout functionality

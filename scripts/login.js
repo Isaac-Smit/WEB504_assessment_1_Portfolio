@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
+
 // Initialize Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyCCGJdGl0d5gONVmNiEWCdXG6FeHPQCuPE",
@@ -45,7 +46,21 @@ form.addEventListener("submit", function (event) {
 
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            showSignedInNotification(); // Call this upon successful login
+            const user = userCredential.user;
+
+            // Check if the email is verified
+            if (user.emailVerified) {
+                showSignedInNotification(); // Call this upon successful login
+            } else {
+                // If not verified, log the user out and show alert
+                signOut(auth)
+                    .then(() => {
+                        alert("You need to verify your email before logging in. Please check your inbox.");
+                    })
+                    .catch((error) => {
+                        console.error("Error logging out:", error.message);
+                    });
+            }
         })
         .catch((error) => {
             console.error("Error logging in:", error.message);

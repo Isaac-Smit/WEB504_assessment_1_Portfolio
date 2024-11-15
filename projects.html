@@ -16,8 +16,8 @@
   <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
 
-  <script type="module" src="scripts/account_management.js"></script>
   <script src="scripts/pop_nav.js"></script>
+  <script type="module" src="scripts/account_management.js"></script>
   <script type="module" src="scripts/login.js"></script>
   <script type="module" src="scripts/google_auth.js"></script>
   <script type="module" src="scripts/auto_scroll.js"></script>
@@ -116,6 +116,11 @@
         <div class="signed-in">Signed in!</div>
         <button class="close-button" onclick="closePopup()">Close</button>
     </div>
+
+    <div class="account-created-container" id="account-created-notification" style="display: none;">
+      <div class="account-created">Account created! Please verify your email.</div>
+      <button class="close-button" onclick="closePopup()">Close</button>
+  </div>
 
     </div>
   </div>

@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-import { getFirestore, collection, addDoc, getDoc, updateDoc, deleteDoc, doc, query, orderBy, serverTimestamp, onSnapshot} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDoc, updateDoc, deleteDoc, doc, query, orderBy, serverTimestamp, onSnapshot } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCCGJdGl0d5gONVmNiEWCdXG6FeHPQCuPE",
@@ -9,76 +9,95 @@ const firebaseConfig = {
     storageBucket: "web502-portfolio.firebasestorage.app",
     messagingSenderId: "655916256395",
     appId: "1:655916256395:web:c7b0ba82b11597e038988e",
-}
+};
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app)
+const db = getFirestore(app);
 
-document.addEventListener("DOMContentLoaded", fetchComments);
 
-//Create function to post comment (and add the comment to firestore)
-async function postComment(commentText) {
-    const user = getAuth().currentUser;
+let commentsListener = null;  // Declare the listener variable globally
 
-    try {
-        //set the format of the data being added to the firestore
-        const docRef = await addDoc(collection(db, "comments"), {
-            text: commentText,
-            userId: user.uid,
-            timestamp: serverTimestamp(),
-            edited: false
-        });
-        console.log("Comment added with ID: ", docRef.id);
-        fetchComments(); //reload to see new comment added
-    } catch (e) {
-        console.error("Error adding comment to database: ", e);
+// Function to post a comment
+function postComment(commentText) {
+    const currentUser = getAuth().currentUser;
+
+    if (!currentUser) {
+        alert("You must be logged in to post a comment.");
+        return;
     }
+
+    const newComment = {
+        userId: currentUser.uid,
+        text: commentText,
+        edited: false,
+        timestamp: serverTimestamp(),
+    };
+
+    const commentsCollection = collection(db, "comments");
+
+    addDoc(commentsCollection, newComment)
+        .then(() => {
+            console.log("Comment added successfully!");
+        })
+        .catch((error) => {
+            console.error("Error posting comment:", error);
+        });
 }
 
-//declare function for collecting, declare the collection variable and set it to the comments collection preset in firestore.
+// Function to fetch and display comments
+// Function to fetch and display comments without duplicates
 function fetchComments() {
+    // Reference to the "comments" collection in Firestore
     const commentsCollection = collection(db, "comments");
-    // declare a constant query that orders the comments by the time/date they were posted
     const q = query(commentsCollection, orderBy("timestamp", "asc"));
 
-    // declare snapshot to catch the new or changed comments
-    onSnapshot(q, async (querySnapshot) => { // Make this function async to await getDoc()
+    console.log("Attaching comments listener...");
+
+    // Store seen comments' text to ensure uniqueness
+    const seenComments = new Set();
+
+    // Attach the listener for real-time updates
+    commentsListener = onSnapshot(q, (querySnapshot) => {
         const commentsList = document.getElementById("comments-list");
-        commentsList.innerHTML = '';  // Clear the current comments list
 
-        const currentUser = getAuth().currentUser;
-        
-        // querySnapshot is used as a callback function to contain the updated comment list.
-        // Declare commentsList and then clear the list to prepare for the new data.
+        // Clear the comments list before re-rendering
+        commentsList.innerHTML = '';
 
-        for (const docSnapshot of querySnapshot.docs) {
-            const comment = docSnapshot.data(); // Get the comment data from Firestore document
-            const commentElement = document.createElement("div");
-            commentElement.classList.add("comments");
+        const currentUser = getAuth().currentUser; // Get the current logged-in user
+        querySnapshot.forEach((docSnap) => {
+            const comment = docSnap.data();
 
-            // Retrieve the fullName from Firestore based on userId (comment.userId)
-            const userRef = doc(db, "user-fullname", comment.userId); // Reference to the user document
-            try {
-                const userDoc = await getDoc(userRef); // Wait for the user document to be fetched
-                if (userDoc.exists()) {
-                    const userData = userDoc.data();
-                    const fullNameDiv = document.createElement("div");
-                    fullNameDiv.classList.add("comment-author");
-                    fullNameDiv.textContent = userData.fullName || "Anonymous"; // Display the user's full name or "Anonymous"
-                    commentElement.appendChild(fullNameDiv);
-                }
-            } catch (error) {
-                console.error("Error fetching user data: ", error);
+            // Only render the comment if it's not a duplicate
+            if (!seenComments.has(comment.text)) {
+                seenComments.add(comment.text);  // Mark this comment's text as seen
+
+                // Call the function to render the individual comment
+                renderComment(comment, docSnap.id, currentUser);
             }
+        });
+    });
+}
 
-            // Append the comment text
-            const textDiv = document.createElement("div");
-            textDiv.classList.add("comment-text");
-            textDiv.textContent = comment.text;
-            commentElement.appendChild(textDiv);
+// Render each comment
+function renderComment(comment, commentId, currentUser) {
+    const commentElement = document.createElement("div");
+    commentElement.classList.add("comments");
 
-            // If the current user is the one who posted the comment, show edit and delete buttons
+    const userDisplayNameRef = doc(db, "user-fullname", comment.userId);
+    
+    getDoc(userDisplayNameRef)
+        .then((userDoc) => {
+            const displayName = userDoc.exists() ? userDoc.data().displayName : "Unknown Author";
+
+            const userNameElement = document.createElement("span");
+            userNameElement.textContent = `${displayName}: `;
+            commentElement.appendChild(userNameElement);
+
+            const commentTextElement = document.createElement("p");
+            commentTextElement.textContent = comment.text;
+            commentElement.appendChild(commentTextElement);
+
             if (currentUser && comment.userId === currentUser.uid) {
                 const buttonsDiv = document.createElement("div");
                 buttonsDiv.classList.add("comment-buttons-container");
@@ -86,67 +105,83 @@ function fetchComments() {
                 const editBtn = document.createElement("button");
                 editBtn.textContent = "Edit";
                 editBtn.classList.add("comment-buttons");
-                editBtn.onclick = () => editComment(docSnapshot.id, comment.text);
+                editBtn.onclick = () => editComment(commentId, comment.text);
 
                 const deleteBtn = document.createElement("button");
                 deleteBtn.textContent = "Delete";
                 deleteBtn.classList.add("comment-buttons");
-                deleteBtn.onclick = () => deleteComment(docSnapshot.id);
-                
-                // Append the edit and delete buttons to the comment
+                deleteBtn.onclick = () => deleteComment(commentId);
+
                 buttonsDiv.appendChild(editBtn);
                 buttonsDiv.appendChild(deleteBtn);
-
                 commentElement.appendChild(buttonsDiv);
             }
 
-            // Append the final comment element to the comments list
+            const commentsList = document.getElementById("comments-list");
             commentsList.appendChild(commentElement);
-        }
-    });
+        })
+        .catch((error) => {
+            console.error("Error fetching user data:", error);
+
+            const userNameElement = document.createElement("span");
+            userNameElement.textContent = "Unknown Author: ";
+            commentElement.appendChild(userNameElement);
+
+            const commentTextElement = document.createElement("p");
+            commentTextElement.textContent = comment.text;
+            commentElement.appendChild(commentTextElement);
+
+            const commentsList = document.getElementById("comments-list");
+            commentsList.appendChild(commentElement);
+        });
 }
 
 
-
-//declare async function 'editComment' that takes paramaters of the comment id and the original text.
+// Edit comment function
 async function editComment(commentId, oldText) {
-    //then declare a variable the is a prompt that holds the original text that can be changed.
     const newText = prompt("Edit your comment: ", oldText);
     if (newText) {
         const commentRef = doc(db, "comments", commentId);
-        await updateDoc(commentRef, {
-            text: newText
-        });
-        console.log("comment updated!")
-        //if there oldtext has been changed, it is then considered "new text", we then save that change
-        //to the comment attached to the comment ID we passed as a parameter earlier to set the text
-        //of that object to the "new text"
+        await updateDoc(commentRef, { text: newText });
+        console.log("Comment updated!");
     }
 }
 
-
-//declare a new async function called "delete comment", using the comment ID as the parameter.
+// Delete comment function
 async function deleteComment(commentId) {
     const commentRef = doc(db, "comments", commentId);
-    //declare a new variable called commentRef, set it to a document, then define the record the function should delete
-    //in this instance we say its in the database, in the collection: "comments" and then we use the parameter of the comment ID
     await deleteDoc(commentRef);
-    console.log("Comment deleted!");    
+    console.log("Comment deleted!");
+
+    // After deleting a comment, manually update the UI
+    fetchComments(); // Re-fetch comments after deleting to ensure up-to-date list
 }
 
+// Listen for auth state changes
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        console.log("Logged in as", user.email);
+    } else {
+        console.log("Logged out");
+    }
 
+    fetchComments(); // Call fetchComments on initial load
+});
+
+// Handling comment submission
 const commentButton = document.getElementById("login-to-comment-btn");
 const commentText = document.getElementById("comment-text");
 
 commentButton.addEventListener("click", (event) => {
     event.preventDefault(); // Prevent the default form submit behavior
 
-    const comment = commentText.value.trim(); // Get the comment text and trim extra spaces
-
+    const comment = commentText.value.trim();
     if (comment) {
-        postComment(comment); // Pass the comment text to the postComment function
-        commentText.value = ""; // Clear the input field after posting
+        postComment(comment); // Post the comment
+        commentText.value = ""; // Clear input after posting
     } else {
         console.log("Please write a comment before submitting.");
     }
 });
+
+
