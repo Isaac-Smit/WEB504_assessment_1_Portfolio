@@ -14,9 +14,13 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+const commentsCollection = collection(db, "comments");
+let commentsListener = null;
 
 
-let commentsListener = null;  // Declare the listener variable globally
+fetchComments();
+
+
 
 // Function to post a comment
 function postComment(commentText) {
@@ -33,9 +37,7 @@ function postComment(commentText) {
         edited: false,
         timestamp: serverTimestamp(),
     };
-
-    const commentsCollection = collection(db, "comments");
-
+    console.log("ADD DOC");
     addDoc(commentsCollection, newComment)
         .then(() => {
             console.log("Comment added successfully!");
@@ -45,37 +47,41 @@ function postComment(commentText) {
         });
 }
 
-// Function to fetch and display comments
+
+
+
 // Function to fetch and display comments without duplicates
 function fetchComments() {
     // Reference to the "comments" collection in Firestore
-    const commentsCollection = collection(db, "comments");
     const q = query(commentsCollection, orderBy("timestamp", "asc"));
 
     console.log("Attaching comments listener...");
 
-    // Store seen comments' text to ensure uniqueness
-    const seenComments = new Set();
-
     // Attach the listener for real-time updates
     commentsListener = onSnapshot(q, (querySnapshot) => {
+        console.log("Why are you doubling my shit?")
         const commentsList = document.getElementById("comments-list");
 
         // Clear the comments list before re-rendering
         commentsList.innerHTML = '';
 
+        // Create a Set for each snapshot update to track uniqueness for this event
+        // let seenComments = new Set();
+
         const currentUser = getAuth().currentUser; // Get the current logged-in user
+        console.log(querySnapshot)
         querySnapshot.forEach((docSnap) => {
             const comment = docSnap.data();
 
-            // Only render the comment if it's not a duplicate
-            if (!seenComments.has(comment.text)) {
-                seenComments.add(comment.text);  // Mark this comment's text as seen
+            // Only render the comment if it's not a duplicate (within this event snapshot)
+            // if (!seenComments.has(comment.text)) {
+            //     seenComments.add(comment.text);  // Mark this comment's text as seen
 
                 // Call the function to render the individual comment
                 renderComment(comment, docSnap.id, currentUser);
-            }
+            // }
         });
+        console.log("finished rendering!! :)")
     });
 }
 
@@ -85,7 +91,7 @@ function renderComment(comment, commentId, currentUser) {
     commentElement.classList.add("comments");
 
     const userDisplayNameRef = doc(db, "user-fullname", comment.userId);
-    
+
     getDoc(userDisplayNameRef)
         .then((userDoc) => {
             const displayName = userDoc.exists() ? userDoc.data().displayName : "Unknown Author";
@@ -152,9 +158,6 @@ async function deleteComment(commentId) {
     const commentRef = doc(db, "comments", commentId);
     await deleteDoc(commentRef);
     console.log("Comment deleted!");
-
-    // After deleting a comment, manually update the UI
-    fetchComments(); // Re-fetch comments after deleting to ensure up-to-date list
 }
 
 // Listen for auth state changes
@@ -164,24 +167,49 @@ onAuthStateChanged(auth, (user) => {
     } else {
         console.log("Logged out");
     }
-
-    fetchComments(); // Call fetchComments on initial load
 });
 
-// Handling comment submission
-const commentButton = document.getElementById("login-to-comment-btn");
-const commentText = document.getElementById("comment-text");
 
-commentButton.addEventListener("click", (event) => {
-    event.preventDefault(); // Prevent the default form submit behavior
+function updateCommentButton(user) {
+    const commentBtn = document.getElementById('login-to-comment-btn'); // Reference to the button
 
-    const comment = commentText.value.trim();
-    if (comment) {
-        postComment(comment); // Post the comment
-        commentText.value = ""; // Clear input after posting
+    if (user) {
+        // If the user is logged in
+        commentBtn.textContent = "Submit Comment!";  // Change button text
+        commentBtn.disabled = false;  // Enable the button
+        commentBtn.onclick = function () {
+
+            const commentText = document.getElementById("comment-text");
+            const comment = commentText.value.trim();
+            if (comment) {
+                postComment(comment); // Post the comment
+                commentText.value = ""; // Clear input after posting
+            } else {
+                console.log("Please write a comment before submitting.");
+            }
+            // Handle the comment submission action here (submit the comment, etc.)
+            console.log("Comment Submitted!");
+        };
     } else {
-        console.log("Please write a comment before submitting.");
+        // If the user is logged out
+        commentBtn.textContent = "Login to comment!";  // Reset button text
+        commentBtn.disabled = false;  // Disable the button
+
+        // Allow the button to still scroll the page to the top when clicked
+        commentBtn.onclick = function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });  // Smooth scroll to top
+            alert('You need to be logged in to comment!');
+        };
     }
-});
+}
+
+getAuth().onAuthStateChanged(function (user) {
+    updateCommentButton(user);
+})
+
+updateCommentButton(auth.currentUser);
+
+
+
 
 
