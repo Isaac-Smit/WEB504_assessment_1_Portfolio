@@ -14,67 +14,55 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app);
 
 const form = document.getElementById('create-account-form');
-form.addEventListener("submit", function (event) {
+form.addEventListener("submit", async function (event) {
     event.preventDefault();
 
     const displayName = document.getElementById('full-name').value;
     const email = document.getElementById('create-email').value;
     const password = document.getElementById('create-password').value;
 
-    createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
+    try {
+        // Attempt to create user with Firebase Auth
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
 
-            // Send email verification
-            sendEmailVerification(user)
-                .then(() => {
-                    console.log("Verification email sent!");
-                })
-                .catch((error) => {
-                    console.error("Error sending verification email:", error.message);
-                });
-
-            // Sign out after account creation to wait for email verification
-            signOut(auth)
-                .then(() => {
-                    console.log("User logged out after creation to wait for email verification.");
-                })
-                .catch((error) => {
-                    console.error("Error logging out user:", error.message);
-                });
-
-            // Save user data in "users" collection
-            setDoc(doc(db, "users", user.uid), {
-                displayName: displayName,
-                email: email,
-                userId: user.uid
-            })
-            .then(() => {
-                console.log("Congrats, account created!");
-                alert("Account created successfully! Please verify your email.");
-            })
-            .catch((error) => {
-                console.error("Error saving user to 'users' collection:", error);
-            });
-
-            // Save displayName to "user-fullname" collection
-            setDoc(doc(db, "user-fullname", user.uid), {
-                displayName: displayName
-            })
-            .then(() => {
-                console.log("Full name added to 'user-fullname' collection!");
-            })
-            .catch((error) => {
-                console.error("Error saving full name to 'user-fullname' collection:", error);
-            });
-
-        })
-        .catch((error) => {
-            console.error("Error creating user:", error.message);
+        // Save user data in Firestore
+        const db = getFirestore(app);
+        await setDoc(doc(db, "users", user.uid), {
+            displayName: displayName,
+            email: email,
+            userId: user.uid
         });
+    
+
+        // Show the "Account created" notification and hide the "Signed in" notification
+        document.getElementById('account-created-notification').style.display = 'block';
+        document.getElementById('signed-in-notification').style.display = 'none';
+
+        // Send email verification
+        await sendEmailVerification(user);
+        console.log("Verification email sent!");
+
+        // Save displayName to "user-fullname" collection
+        await setDoc(doc(db, "user-fullname", user.uid), {
+            displayName: displayName
+        });
+        console.log("Full name added to 'user-fullname' collection!");
+
+        // Sign out after account creation to wait for email verification
+        await signOut(auth);
+        console.log("User logged out after creation to wait for email verification.");
+
+    } catch (error) {
+        console.error("Error during account creation process:", error);
+        if (error.code === 'auth/email-already-in-use') {
+            alert("This email is already associated with an account.");
+        } else {
+            alert("An unexpected error occurred. Please try again later.");
+        }
+    }
 });
 
 // Watch for changes in authentication state (whether the user is logged in or not)
@@ -85,15 +73,6 @@ onAuthStateChanged(auth, (user) => {
             // Allow access to the rest of your app
         } else {
             console.log("Please verify your email before continuing.");
-            // Optionally, prompt the user to send the verification email again
-            // Uncomment to allow the user to resend the verification email if they haven't received it
-            // user.sendEmailVerification()
-            //     .then(() => {
-            //         console.log("Verification email re-sent!");
-            //     })
-            //     .catch((error) => {
-            //         console.error("Error re-sending verification email:", error.message);
-            //     });
         }
     } else {
         console.log("No user is signed in.");

@@ -88,6 +88,7 @@
       <div id="login-form-container" style="display: none;">
         <h2>Login with Email</h2>
         <form id="login-email-form" class="login-form">
+          <div id="email-error" style="height: 20px;"></div>
           <input class="login-form-button" type="email" id="login-email" placeholder="Enter your email" required>
           <input class="login-form-button" type="password" id="login-password" placeholder="Enter your password" required>
           <button type="submit" class="login-button">Login</button>
@@ -101,11 +102,14 @@
       </div>
 
       <div id="create-account-form-container" style="display: none;">
-        <h2>Create Account</h2>
+        <div class="create-account-header">Create Account</div>
         <form id="create-account-form">
           <input class="login-form-button" type="text" id="full-name" placeholder="Full Name" required>
           <input class="login-form-button" type="email" id="create-email" placeholder="Email" required>
-          <input class="login-form-button" type="password" id="create-password" placeholder="Password" required>
+          <input class="login-form-button" type="password" id="create-password" placeholder="Password" required 
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$"
+          title="Password must be at least 8 characters long and include one lowercase letter, one uppercase letter, one number, and one special character."
+          placeholder="Enter a strong password">
           <button class="create-account-form-button" type="submit" id="create-submit">Create Account</button>
         </form>
         <div class="divider"></div>
@@ -116,12 +120,12 @@
       <div class="signed-in-container" id="signed-in-notification" style="display: none;">
         <div class="signed-in">Signed in!</div>
         <button class="close-button" onclick="closePopup()">Close</button>
-    </div>
+      </div>
 
-    <div class="account-created-container" id="account-created-notification" style="display: none;">
+      <div class="account-created-container" id="account-created-notification" style="display: none;">
       <div class="account-created">Account created! Please verify your email.</div>
       <button class="close-button" onclick="closePopup()">Close</button>
-  </div>
+      </div>
 
     </div>
   </div>

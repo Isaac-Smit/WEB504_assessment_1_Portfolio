@@ -207,6 +207,10 @@ body {
     transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
+.create-account-header {
+font-size: 1.6vw;
+}
+
 .create-account-form-button:hover {
     background-color: #357ae8;
     transform: scale(1.05);
