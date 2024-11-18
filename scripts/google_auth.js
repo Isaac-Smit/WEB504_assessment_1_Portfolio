@@ -24,6 +24,8 @@ auth.languageCode = 'en'
 const provider = new GoogleAuthProvider();
 const db = getFirestore(app);
 
+//declare the onauthsatechanged function to see if the user is logged in, if they are show the signed in notification
+//if they aren't then show the logged out notification.
 onAuthStateChanged(auth, (user) => {
     if (user) {
         showSignedInNotification(user);
@@ -32,12 +34,14 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
+//declare a const variable, called 'googleLogin' and set it to equal the html element 'google-login-btn'
+//we then attach an event listener to that element to listen for a click, then on a click we trigger a function.
 const googleLogin = document.getElementById("google-login-btn");
 googleLogin.addEventListener("click", function() {
     signInWithPopup(auth, provider)
         .then((result) => {
             const user = result.user;
-
+            // we use a .then method to take the resuly and apply it a variable called user and call the 'signed in' notification.
             showSignedInNotification();
 
             // Prepare user data to store
@@ -102,7 +106,6 @@ function showLoggedOutNotification() {
 // Handle logout functionality
 function handleLogout() {
     const auth = getAuth();
-    console.log("Logging out is impossible!")
     signOut(auth)
         .then(() => {
             alert("Logged out successfully!");

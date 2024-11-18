@@ -27,7 +27,7 @@ document.getElementById('contact-form').addEventListener('submit', submitForm);
 function submitForm(e){
 e.preventDefault();
 
-//Get values
+//Get values from the contact form
 const firstName = getInputVal('first-name')
 const lastName = getInputVal('last-name')
 const email = getInputVal('email')
@@ -35,16 +35,13 @@ const message = getInputVal('message')
 
 saveMessage(firstName, lastName, email, message)
 
-//show alert
+//show the alert for sucessful message send
 document.querySelector('.alert').style.display = 'block';
 
 //hide alert after 3 seconds
 setTimeout(function(){
 document.querySelector('.alert').style.display = 'none';
 },3000)
-
-document.getElementById('contact-form').requestFullscreen();
-
 }
 
 //function to get form values

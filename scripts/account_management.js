@@ -20,10 +20,13 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+//declare a const variable called 'form' attach an event listener waiting for 
+//submit the event we want is async, prevent page form reloading on submit
 const form = document.getElementById('create-account-form');
 form.addEventListener("submit", async function (event) {
     event.preventDefault();
 
+    //declare constant variables to collect user data and make them the value of corresponding inputs in the html element by ID.
     const displayName = document.getElementById('full-name').value;
     const email = document.getElementById('create-email').value;
     const password = document.getElementById('create-password').value;
@@ -46,7 +49,7 @@ form.addEventListener("submit", async function (event) {
         document.getElementById('account-created-notification').style.display = 'block';
         document.getElementById('signed-in-notification').style.display = 'none';
 
-        // Send email verification
+        // Send email verification to the users email
         await sendEmailVerification(user);
         console.log("Verification email sent!");
 

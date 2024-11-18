@@ -39,14 +39,24 @@ function showSignedInNotification() {
     loginBtn.onclick = handleLogout; // Set click event to handleLogout for logging out
 }
 
+// Declare a variable to track whether the form is being submitted
+let submitting = false;
+
 // Event Listener for the Login Form
 const form = document.getElementById('login-email-form');
 form.addEventListener("submit", function (event) {
-    event.preventDefault();
+    event.preventDefault();  // Prevent form from submitting immediately
+
+    // If the form is already being submitted, do nothing
+    if (submitting) return;
+    
+    // Mark as submitting
+    submitting = true;
 
     const email = document.getElementById('login-email').value;
     const password = document.getElementById('login-password').value;
 
+    // Perform the login attempt
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             const user = userCredential.user;
@@ -68,8 +78,15 @@ form.addEventListener("submit", function (event) {
         .catch((error) => {
             console.error("Error logging in:", error.message);
             alert("Error logging in: " + error.message);
+        })
+        .finally(() => {
+            // After the process resolves, reset the submitting flag
+            submitting = false;
         });
 });
+
+
+
 
 // Function to handle user logout
 function handleLogout() {
@@ -81,22 +98,14 @@ function handleLogout() {
             const loginBtn = document.querySelector(".nav-login-button");
             loginBtn.textContent = "Login";
             loginBtn.onclick = openPopup; // Reset click handler to open login popup
+            document.getElementById("nav-login-btn").style.display = "block"; // Show login button again
 
             closePopup(); // Close the popup if it was open
         })
         .catch((error) => {
             console.error("Error logging out:", error.message);
+            // If an error occurs, refresh the page to reset state
+            alert("An error occurred while logging out. The page will now refresh.");
+            location.reload();  // This will refresh the page
         });
-}
-
-// Function to open the login popup
-function openPopup() {
-    const popup = document.getElementById("login-popup");
-    popup.style.display = "flex";
-}
-
-// Function to close the login popup
-function closePopup() {
-    const popup = document.getElementById("login-popup");
-    popup.style.display = "none";
 }
