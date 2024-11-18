@@ -1,9 +1,9 @@
-//import the firebase modules we are using through the script
+//import the firebase modules and functons we are using through the script
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 import { getFirestore, collection, addDoc, getDoc, updateDoc, deleteDoc, doc, query, orderBy, serverTimestamp, onSnapshot } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
-//defining the firebase config
+//setting firebase config (again lol)
 const firebaseConfig = {
     apiKey: "AIzaSyCCGJdGl0d5gONVmNiEWCdXG6FeHPQCuPE",
     authDomain: "web502-portfolio.firebaseapp.com",
@@ -18,6 +18,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const commentsCollection = collection(db, "comments");
+
 let commentsListener = null;
 
 //calling fetchComments function to display comments on page load

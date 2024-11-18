@@ -1,8 +1,12 @@
+
+//For the account management JS we import the app initlization again, but this time we import the firebase auth module since we
+//are going to authenticate users (specifically with email and password) so we import the build in firebase-auth functions we will use
+//getAuth, sendEmailVerificatio, signOut and onAuthStateChanged
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
-// Initialize Firebase
+// Again set up the standard firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyCCGJdGl0d5gONVmNiEWCdXG6FeHPQCuPE",
     authDomain: "web502-portfolio.firebaseapp.com",
@@ -12,6 +16,7 @@ const firebaseConfig = {
     appId: "1:655916256395:web:c7b0ba82b11597e038988e",
 };
 
+//same variables to initialise the application
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 

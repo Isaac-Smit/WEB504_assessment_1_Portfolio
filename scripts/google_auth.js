@@ -1,4 +1,6 @@
 
+//same as account_management, we import firebase auth and firestore
+//with the relevant firebase functions we'll use in the script
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
@@ -14,6 +16,8 @@ const firebaseConfig = {
     appId: "1:655916256395:web:c7b0ba82b11597e038988e",
 };
 
+//declaring the firebase variables (config, authentication for app, declare the auth language as engish
+//estbalishing the provider we're going to use and the firestore)
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 auth.languageCode = 'en'

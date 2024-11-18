@@ -1,8 +1,9 @@
+//For the Javascript file that handles password login we import the relevent firebase SDKS and modules we will be leveraging
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
 
-// Initialize Firebase
+// declare the Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyCCGJdGl0d5gONVmNiEWCdXG6FeHPQCuPE",
     authDomain: "web502-portfolio.firebaseapp.com",
@@ -12,6 +13,8 @@ const firebaseConfig = {
     appId: "1:655916256395:web:c7b0ba82b11597e038988e",
 };
 
+//declare the fire base app and its configuartion, setting the parameters for initializeApp as the firebase config
+//and setting the param for getAuth as the 'app' variable.
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
