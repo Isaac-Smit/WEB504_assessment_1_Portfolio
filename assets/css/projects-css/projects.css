@@ -17,6 +17,7 @@ body {
   overflow: hidden;
   text-decoration: none;
   transition: color 0.3s ease;
+  letter-spacing: 0.2125rem;
 }
 
 .nav-login-button::before {
@@ -506,7 +507,27 @@ body {
   margin: 20px;
 }
 
+@media (max-width: 1024px) {
+  .navbar .nav-login-button {
+    font-size: 2.2vw;
+  }
+  .content-outer-container .content-inner-container .comment-section {
+    font-size: 1.2vw;
+  }
+  .content-outer-container .content-inner-container .comment-section .comment-form textarea {
+    width: 120%;
+  }
+  .content-outer-container .content-inner-container .comment-section .comment-title {
+    font-size: 2vw;
+  }
+  .content-outer-container .content-inner-container .comment-section .comments-list {
+    font-size: 1.5vw;
+  }
+}
 @media (max-width: 768px) {
+  .navbar .nav-login-button {
+    font-size: 3vw;
+  }
   .content-outer-container .content-inner-container .title-container {
     font-size: 3vw;
     padding-left: 0%;
@@ -525,8 +546,43 @@ body {
   .content-outer-container .content-inner-container .project-card-container .project-card .project-header {
     font-size: 3vw;
   }
+  .content-outer-container .content-inner-container .comment-section {
+    font-size: 1.7vw;
+  }
+  .content-outer-container .content-inner-container .comment-section .comment-form textarea {
+    width: 150%;
+  }
+  .content-outer-container .content-inner-container .comment-section .comment-title {
+    font-size: 2.5vw;
+  }
+  .content-outer-container .content-inner-container .comment-section .comments-list {
+    font-size: 2vw;
+    width: 100%;
+  }
 }
 @media (max-width: 425px) {
+  .navbar .nav-login-button {
+    font-size: 5vw;
+  }
+  .content-outer-container .content-inner-container .comment-section {
+    font-size: 3vw;
+  }
+  .content-outer-container .content-inner-container .comment-section .comment-form textarea {
+    width: 200%;
+  }
+  .content-outer-container .content-inner-container .comment-section .submit-comment {
+    width: 70%;
+  }
+  .content-outer-container .content-inner-container .comment-section .comment-title {
+    font-size: 4vw;
+  }
+  .content-outer-container .content-inner-container .comment-section .comments-list {
+    width: 120%;
+    font-size: 3vw;
+  }
+  .content-outer-container .content-inner-container .comment-section .comments-list .comments {
+    flex-direction: column;
+  }
   .content-outer-container .content-inner-container .title-container {
     padding-left: 0%;
     width: 30%;

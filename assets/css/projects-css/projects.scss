@@ -19,6 +19,7 @@ body {
     overflow: hidden;
     text-decoration: none;
     transition: color 0.3s ease;
+    letter-spacing: 0.2125rem;
 }
 
 .nav-login-button::before {
@@ -529,7 +530,40 @@ font-size: 1.6vw;
     }
 }
 
+@media (max-width: 1024px) {
+    .navbar{
+        .nav-login-button{
+            font-size: 2.2vw;
+        }
+    }
+    .content-outer-container {
+      .content-inner-container {
+        .comment-section {
+          font-size: 1.2vw;
+          .comment-form textarea{
+            width: 120%;
+          }
+  
+          .comment-title {
+            font-size: 2vw;
+          }
+  
+          .comments-list {
+            font-size: 1.5vw;
+            
+          }
+        }
+      }
+    }
+  }
+  
+
 @media (max-width: 768px) {
+    .navbar{
+        .nav-login-button{
+            font-size: 3vw;
+        }
+    }
     .content-outer-container{
         .content-inner-container{
             .title-container{
@@ -552,13 +586,59 @@ font-size: 1.6vw;
                 }
                 
             }
+
+            .comment-section {
+                font-size: 1.7vw;
+                .comment-form textarea{
+                  width: 150%;
+                }
+        
+                .comment-title {
+                  font-size: 2.5vw;
+                }
+        
+                .comments-list {
+                  font-size: 2vw;
+                  width: 100%;
+                  
+                }
+              }
         }
     }
 }
 
 @media (max-width: 425px) {
+
+    .navbar{
+        .nav-login-button{
+            font-size: 5vw;
+        }
+    }
     .content-outer-container{
         .content-inner-container{
+
+            .comment-section {
+                font-size: 3vw;
+                .comment-form textarea{
+                  width: 200%;
+                }
+                .submit-comment {
+                    width: 70%;
+                }
+        
+                .comment-title {
+                  font-size: 4vw;
+                }
+        
+                .comments-list {
+                width: 120%;
+                font-size: 3vw;
+                  .comments {
+                    flex-direction: column;
+                  }
+                }
+              }
+
             .title-container{
                 padding-left: 0%;
                 width: 30%;

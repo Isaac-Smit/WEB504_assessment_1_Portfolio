@@ -154,7 +154,7 @@ body {
 }
 
 .content-outer-container {
-  margin-top: 5%;
+  margin-top: 15%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -263,7 +263,7 @@ body {
     border-right: 0;
   }
   .content-outer-container {
-    margin-top: 15%;
+    margin-top: 5%;
     width: 90vw;
     height: 80vh;
   }
@@ -296,6 +296,9 @@ body {
   .navbar .navbar-collapse .navbar-nav .nav-link {
     padding: 0.4rem;
     font-size: 3vw;
+  }
+  .content-outer-container {
+    margin-top: 13%;
   }
   .content-outer-container .content-inner-container .picture-container {
     padding: 2%;

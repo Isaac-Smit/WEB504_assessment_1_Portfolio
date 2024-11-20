@@ -9,6 +9,7 @@ body {
 
 .content-outer-container {
   height: 70vh;
+  margin-top: 3%;
 }
 .content-outer-container .content-inner-container {
   display: flex;
@@ -203,10 +204,15 @@ body {
   fill: #E1306C;
 }
 
+@media (max-width: 1024px) {
+  .content-outer-container {
+    margin-top: 10%;
+  }
+}
 @media (max-width: 768px) {
   .content-outer-container {
     height: 120vh;
-    margin-top: 30%;
+    margin-top: 10%;
   }
   .content-outer-container .content-inner-container .title-container-skills {
     display: flex;
